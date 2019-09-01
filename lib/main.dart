@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:calculadora_imc/models/person.dart';
 
 void main() => runApp(
       MaterialApp(
