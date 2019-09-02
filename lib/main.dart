@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:calculadora_imc/models/person.dart';
 
 void main() => runApp(
       MaterialApp(
@@ -32,6 +31,8 @@ class _HomeState extends State<Home> {
   void resetFields() {
     _weightController.text = '';
     _heightController.text = '';
+    _imc = 0;
+    _selectedRadio = null;
     setState(() {
       _result = 'Informe seus dados';
     });
@@ -174,9 +175,15 @@ if (_selectedRadio == 1) {
     );
   }
 
-Widget buildTextResult() {
-    if (_selectedRadio == 1){
-    if (_imc < 20.7)
+    Widget buildTextResult() {
+    int tempSelectedRadio = 0;
+    if (_selectedRadio == 0 || _selectedRadio == null && _imc == 0){
+      return buildPaddingColors(Colors.grey);
+    }
+    else if (_selectedRadio == 1){
+    if (_imc == 0)
+    return buildPaddingColors(Colors.grey);
+    else if (_imc < 20.7)
     return buildPaddingColors(Colors.orange);
     else if (_imc < 26.4)
     return buildPaddingColors(Colors.green);
@@ -188,7 +195,9 @@ Widget buildTextResult() {
     return buildPaddingColors(Colors.redAccent[700]);
     }
     else if (_selectedRadio == 2){
-    if (_imc < 19.1)
+    if (_imc == 0)
+    return buildPaddingColors(Colors.grey);
+    else if (_imc < 19.1)
     return buildPaddingColors(Colors.orange);
     else if (_imc < 25.8)
     return buildPaddingColors(Colors.green);
